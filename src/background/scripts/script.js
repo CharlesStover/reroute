@@ -7,8 +7,36 @@ const beforeWebRequestFilter = {
 
 const beforeWebRequestExtraInfoSpec = [ 'blocking' ];
 
-const handleBeforeWebRequest = ({ url }) => {
+let reroutes = [ ];
+
+
+
+const handleChange = changes => {
+  if (Object.prototype.hasOwnProperty.call(changes, 'reroutes')) {
+    if (!changes.reroutes.newValue) {
+      reroutes = [ ];
+      return;
+    }
+    reroutes = changes.reroutes.newValue
+      .filter(reroute => reroute.enabled)
+      .map(reroute => ({
+        ...reroute,
+        route: new RegExp(reroute.route)
+      }));
+    console.log(reroutes);
+  }
 };
+
+const handleBeforeWebRequest = ({ url }) => {
+  for (const reroute of reroutes) {
+    if (reroute.route.test(url)) {
+      return {
+        redirectUrl: reroute.reroute
+      };
+    }
+  }
+};
+
 
 
 chrome.runtime.onInstalled.addListener(function handleAddInstalledListener() {
@@ -29,6 +57,14 @@ chrome.runtime.onInstalled.addListener(function handleAddInstalledListener() {
       }]);
     }
   );
+});
+
+chrome.storage.onChanged.addListener(handleChange);
+
+chrome.storage.sync.get('reroutes', data => {
+  if (data.reroutes) {
+    reroutes = data.reroutes;
+  }
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
