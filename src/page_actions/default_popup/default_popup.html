@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Reroute</title>
+    <link rel="stylesheet" media="screen" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" />
+    <link rel="stylesheet" media="screen" type="text/css" href="./default_popup.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Reroute</th>
+            <td class="delete"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="route">old route</td>
+            <td class="reroute">new route</td>
+            <td class="delete">🗑</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="route">
+              <div>
+                /<input type="text" value="^https?:\/\/domain\.com\/(.+)$" />/
+              </div>
+            </td>
+            <td class="reroute">
+              <input type="text" value="https://localhost/$1" />
+            </td>
+            <td class="add">+</td>
+          </tr>
+        </tfoot>
+      </table>
+    </main>
+    <script type="text/javascript" src="./default_popup.js"></script>
+  </body>
+</html>

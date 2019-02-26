@@ -1,0 +1,122 @@
+:root {
+  --body-width: 44rem;
+  --delete-width: 2rem;
+  --horizontal-padding: 1rem;
+}
+
+body {
+  background-color: #202020;
+  color: #F0F0F0;
+  margin: 0;
+  padding: 0;
+  width: var(--body-width);
+}
+
+h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  border-bottom: 1px solid #404040;
+  padding: 1rem var(--horizontal-padding);
+}
+
+html {
+  font-size: 16px;
+}
+
+input {
+  background-color: #404040;
+  border: 1px solid #808080;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #F0F0F0;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+}
+
+main {
+  padding: 1rem var(--horizontal-padding);
+}
+
+.route,
+.reroute {
+  border-right: 1px solid #282828;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  vertical-align: top;
+  width: calc((var(--body-width) - var(--horizontal-padding) - var(--delete-width) - 2px) / 2);
+  word-break: break-all;
+}
+
+.route,
+.reroute,
+th {
+  padding: 0.5rem 1rem;
+}
+
+.route > div {
+  align-items: center;
+  display: flex;
+}
+
+.route > div > input {
+  flex-grow: 1;
+}
+
+table {
+  border-spacing: 0;
+}
+
+tbody .delete {
+  color: #C04040;
+}
+
+tbody .delete,
+tfoot .add {
+  box-sizing: border-box;
+  font-size: 1.75rem;
+  padding: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  width: var(--delete-width);
+}
+
+tbody td {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+tfoot .add {
+  color: #40C040;
+}
+
+tfoot td {
+  border-top: 1px solid #404040;
+  flex-direction: row;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+th {
+  border-right: 1px solid #282828;
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+}
+
+th,
+thead .delete {
+  border-bottom: 1px solid #404040;
+  font-size: 1rem;
+}
+
+th:after {
+  content: ":";
+}
