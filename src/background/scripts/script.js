@@ -29,11 +29,16 @@ const handleChange = changes => {
 
 const handleBeforeWebRequest = ({ url }) => {
   for (const reroute of reroutes) {
-    if (reroute.route.test(url)) {
-      return {
-        redirectUrl: reroute.reroute
-      };
+    const matches = url.match(reroute.route);
+    if (matches === null) {
+      return {};
     }
+    let redirectUrl = reroute.reroute;
+    const matchesLength = matches.length;
+    for (let i = 1; i < matchesLength; i++) {
+      redirectUrl = redirectUrl.replace(`$${i}`, matches[i]);
+    }
+    return { redirectUrl };
   }
 };
 
