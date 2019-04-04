@@ -11,21 +11,17 @@ connections.
 
 ## Installation
 
-* [Download](https://github.com/CharlesStover/reroute/archive/1.0.0.zip) the
-  source code for this Git repository to your local machine, then unzip it.
-
-  * Alternatively, you may `git clone` this repository instead of downloading
-    the `.zip` file.
+* Either `git clone https://github.com/CharlesStover/reroute.git` or
+  [download and unzip](https://github.com/CharlesStover/reroute/archive/1.0.0.zip)
+  the source code for this repository.
 
 * Open the Extension Management page by navigating to `chrome://extensions`.
 
-  * The Extension Management page can also be opened by clicking on the Chrome
-    menu, hovering over `More Tools` then selecting `Extensions`.
-
 * Enable Developer Mode by clicking the toggle switch next to `Developer mode`.
 
-* Click the `LOAD UNPACKED` button and select the extension directory that you
-  either unzipped or cloned.
+* Click the `LOAD UNPACKED` button and select `/path/to/repository/src`.
+  **You must navigate to the `src` directory** and not the root directory.
 
-* The extension directory is located at `/path/to/repository/src`. **You must
-  navigate to the `src` directory** and not just the reposotiry directory.
+* Under the newly-added `Reroute` extension, click the `Details` button.
+
+* Enable `Allow in incognito`.
