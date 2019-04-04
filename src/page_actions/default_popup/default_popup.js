@@ -1,23 +1,89 @@
 const clearAll = document.getElementById('clear-all');
 const tbody = document.getElementsByTagName('tbody').item(0);
 
+
+const handleDelete = reroute => {
+  if (confirm('Are you sure you want to delete this reroute?')) {
+    chrome.storage.sync.get('reroutes', data => {
+      if (data.reroutes) {
+        chrome.storage.sync.set({
+          reroutes: data.reroutes.filter(rr =>
+            rr.route !== reroute.route ||
+            rr.reroute !== reroute.reroute
+          )
+        });
+        location.reload();
+      }
+      else {
+        alert('Error 1: Could not find any existing reroutes.');
+      }
+    });
+  }
+};
+
+const handleEnable = (reroute, enabled) => {
+  chrome.storage.sync.get('reroutes', data => {
+    if (data.reroutes) {
+      chrome.storage.sync.set({
+        reroutes: data.reroutes.map(rr =>
+          rr.route === reroute.route &&
+          rr.reroute === reroute.reroute ? {
+            ...rr,
+            enabled,
+          } :
+          rr
+        )
+      });
+    }
+    else {
+      alert('Error 2: could not find any existing reroutes.');
+    }
+  });
+};
+
+
+
 chrome.storage.sync.get('reroutes', data => {
   if (data.reroutes) {
     for (const reroute of data.reroutes) {
       const row = document.createElement('tr');
+      const enabled = document.createElement('td');
+      enabled.className = 'enabled';
+      const enabledCheckbox = document.createElement('input');
+      enabledCheckbox.checked = reroute.enabled;
+      enabledCheckbox.setAttribute('type', 'checkbox');
+      enabledCheckbox.addEventListener('click', e => {
+        handleEnable(reroute, e.target.checked);
+      });
+      enabled.appendChild(enabledCheckbox);
+      row.appendChild(enabled);
       const oldRoute = document.createElement('td');
-      oldRoute.appendChild(document.createTextNode(reroute.route));
+      oldRoute.className = 'old-route route-column';
+      const oldRouteDiv = document.createElement('div');
+      oldRouteDiv.appendChild(document.createTextNode(reroute.route));
+      oldRoute.appendChild(oldRouteDiv);
       row.appendChild(oldRoute);
       const newRoute = document.createElement('td');
-      newRoute.appendChild(document.createTextNode(reroute.reroute));
+      newRoute.className = 'new-route route-column';
+      const newRouteDiv = document.createElement('div');
+      newRouteDiv.appendChild(document.createTextNode(reroute.reroute));
+      newRoute.appendChild(newRouteDiv);
       row.appendChild(newRoute);
       const deleteReroute = document.createElement('td');
-      deleteReroute.appendChild(document.createTextNode('🗑'));
+      deleteReroute.className = 'delete';
+      const deleteRerouteSpan = document.createElement('span');
+      deleteRerouteSpan.appendChild(document.createTextNode('🗑'));
+      deleteRerouteSpan.addEventListener('click', () => {
+        handleDelete(reroute);
+      });
+      deleteReroute.appendChild(deleteRerouteSpan);
       row.appendChild(deleteReroute);
       tbody.appendChild(row);
     }
   }
 });
+
+
 
 clearAll.addEventListener('click', () => {
   if (confirm('Are you sure you want to erase all of your rerouting rules?')) {
@@ -26,10 +92,12 @@ clearAll.addEventListener('click', () => {
   }
 });
 
+
+
 document.forms[0].addEventListener('submit', e => {
   e.preventDefault();
   const reroute = {
-    enabled: true,
+    enabled: document.forms[0].enabledCheckbox.checked,
     reroute: document.forms[0].reroute.value,
     route: document.forms[0].route.value,
   };

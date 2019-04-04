@@ -1,7 +1,31 @@
 :root {
   --body-width: 44rem;
-  --delete-width: 2rem;
   --horizontal-padding: 1rem;
+  --settings-width: 2rem;
+}
+
+.add {
+  color: #40C040;
+}
+
+.add,
+.delete,
+.enabled {
+  box-sizing: border-box;
+  font-size: 1.75rem;
+  line-height: 0;
+  padding: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  width: var(--settings-width);
+}
+
+.add-old-route {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  width: 100%;
 }
 
 body {
@@ -9,24 +33,19 @@ body {
   color: #F0F0F0;
   margin: 0;
   padding: 0;
-  width: var(--body-width);
+  max-width: var(--body-width);
+  min-width: var(--body-width);
 }
 
-h1 {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  line-height: 1em;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+.delete > span {
+  color: #C04040;
+  cursor: pointer;
 }
 
-header {
-  border-bottom: 1px solid #404040;
-  padding: 1rem var(--horizontal-padding);
+footer {
+  padding: 0 var(--horizontal-padding) 1rem var(--horizontal-padding);
 }
-
+  
 html {
   font-size: 16px;
 }
@@ -37,6 +56,7 @@ input {
   border-radius: 2px;
   box-sizing: border-box;
   color: #F0F0F0;
+  flex-grow: 1;
   padding: 0.25rem 0.5rem;
   width: 100%;
 }
@@ -45,78 +65,55 @@ main {
   padding: 1rem var(--horizontal-padding);
 }
 
-.route,
-.reroute {
-  border-right: 1px solid #282828;
-  box-sizing: border-box;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.75rem;
-  vertical-align: top;
-  width: calc((var(--body-width) - var(--horizontal-padding) - var(--delete-width) - 2px) / 2);
-  word-break: break-all;
-}
-
-.route,
-.reroute,
-th {
+.route-column {
+  max-width: calc((
+    var(--body-width) -
+    var(--horizontal-padding) -
+    var(--settings-width) * 2 -
+    2px
+  ) / 2);
   padding: 0.5rem 1rem;
-}
-
-.route > div {
-  align-items: center;
-  display: flex;
-}
-
-.route > div > input {
-  flex-grow: 1;
 }
 
 table {
   border-spacing: 0;
+  max-width: 100%;
 }
 
-tbody .delete {
-  color: #C04040;
-}
-
-tbody .delete,
-tfoot .add {
-  box-sizing: border-box;
-  font-size: 1.75rem;
-  padding: 0.5rem;
-  text-align: center;
-  vertical-align: middle;
-  width: var(--delete-width);
-}
-
-tbody td {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-
-tfoot .add {
-  color: #40C040;
-}
-
-tfoot td {
-  border-top: 1px solid #404040;
-  flex-direction: row;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-th {
+tbody > tr > .route-column {
   border-right: 1px solid #282828;
-  font-family: "Roboto", sans-serif;
-  text-align: left;
+  box-sizing: border-box;
+  vertical-align: top;
 }
 
-th,
-thead .delete {
-  border-bottom: 1px solid #404040;
-  font-size: 1rem;
+tbody > tr > .route-column > div {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  hyphens: none;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
-th:after {
+tfoot > tr > .route-column {
+  border-right: 1px solid #282828;
+}
+
+tfoot > tr > td {
+  border-top: 1px solid #404040;
+  vertical-align: middle;
+}
+
+thead > tr > .route-column {
+  border-right: 1px solid #282828;
+}
+
+thead > tr > .route-column:after {
   content: ":";
+}
+
+thead > tr > th {
+  border-bottom: 1px solid #404040;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  text-align: left;
 }

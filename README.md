@@ -1,8 +1,13 @@
 # Reroute
 
-Reroute is a Chrome extension for redirecting all connections to a route to
-another, useful for pointing production endpoints to their development
-alternatives.
+Reroute is a Chrome extension for redirecting all connections from one route to
+another.
+
+As a developer, this is useful for pointing production endpoints to their
+development alternatives.
+
+As a client, this is useful for blocking malicious or unwanted network
+connections.
 
 ## Installation
 

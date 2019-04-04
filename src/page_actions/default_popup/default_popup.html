@@ -12,20 +12,23 @@
         <table>
           <thead>
             <tr>
-              <th>Route</th>
-              <th>Reroute</th>
-              <td class="delete"></td>
+              <th></th>
+              <th class="route-column">Old Route</th>
+              <th class="route-column">New Route</th>
+              <th></th>
             </tr>
           </thead>
-          <tbody></tbody>
           <tfoot>
             <tr>
-              <td class="route">
-                <div>
+              <td class="enabled">
+                <input checked name="enabledCheckbox" type="checkbox" />
+              </td>
+              <td class="route-column">
+                <div class="add-old-route">
                   /<input name="route" type="text" value="^https?:\/\/domain\.com\/(.+)$" />/
                 </div>
               </td>
-              <td class="reroute">
+              <td class="route-column">
                 <input name="reroute" type="text" value="https://localhost/$1" />
               </td>
               <td class="add">
@@ -33,6 +36,7 @@
               </td>
             </tr>
           </tfoot>
+          <tbody></tbody>
         </table>
       </form>
     </main>
