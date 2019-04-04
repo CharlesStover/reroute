@@ -23,7 +23,6 @@ const handleChange = changes => {
         ...reroute,
         route: new RegExp(reroute.route)
       }));
-    console.log(reroutes);
   }
 };
 

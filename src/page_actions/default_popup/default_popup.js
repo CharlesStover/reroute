@@ -43,6 +43,18 @@ const handleEnable = (reroute, enabled) => {
 
 
 
+chrome.storage.sync.get('formReroute', data => {
+  if (data.formReroute) {
+    document.forms[0].reroute.value = data.formReroute;
+  }
+});
+
+chrome.storage.sync.get('formRoute', data => {
+  if (data.formRoute) {
+    document.forms[0].route.value = data.formRoute;
+  }
+});
+
 chrome.storage.sync.get('reroutes', data => {
   if (data.reroutes) {
     for (const reroute of data.reroutes) {
@@ -115,4 +127,24 @@ document.forms[0].addEventListener('submit', e => {
   });
   location.reload();
   return false;
+});
+
+let formRerouteDebounce = 0;
+document.forms[0].reroute.addEventListener('keyup', e => {
+  clearTimeout(formRerouteDebounce);
+  formRerouteDebounce = setTimeout(() => {
+    chrome.storage.sync.set({
+      formReroute: e.target.value,
+    });
+  }, 20);
+});
+
+let formRouteDebounce = 0;
+document.forms[0].route.addEventListener('keyup', e => {
+  clearTimeout(formRouteDebounce);
+  formRouteDebounce = setTimeout(() => {
+    chrome.storage.sync.set({
+      formRoute: e.target.value,
+    });
+  }, 20);
 });
