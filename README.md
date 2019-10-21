@@ -14,14 +14,15 @@ connections.
 * Either `git clone https://github.com/CharlesStover/reroute.git` or
   [download and unzip](https://github.com/CharlesStover/reroute/archive/1.0.0.zip)
   the source code for this repository.
-
 * Open the Extension Management page by navigating to `chrome://extensions`.
-
 * Enable Developer Mode by clicking the toggle switch next to `Developer mode`.
-
 * Click the `LOAD UNPACKED` button and select `/path/to/repository/src`.
   **You must navigate to the `src` directory** and not the root directory.
-
 * Under the newly-added `Reroute` extension, click the `Details` button.
-
 * Enable `Allow in incognito`.
+
+## Sponsor 💗
+
+If you are a fan of this project, you may
+[become a sponsor](https://github.com/sponsors/CharlesStover)
+via GitHub's Sponsors Program.
